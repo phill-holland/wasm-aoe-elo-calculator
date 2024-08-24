@@ -1,13 +1,12 @@
-module;
+#include "player.h"
 #include <vector>
 #include <tuple>
 #include <string>
 
-import player;
+#ifndef _TEAM
+#define _TEAM
 
-export module team;
-
-export class team
+class team
 {
 public:
     std::vector<std::tuple<int,player>> members;
@@ -39,3 +38,5 @@ public:
         return result;
     }
 };
+
+#endif

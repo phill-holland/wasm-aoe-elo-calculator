@@ -1,13 +1,11 @@
-module;
-
+#include "team.h"
 #include <vector>
 #include <string>
 
-import team;
+#ifndef _TEAMS
+#define _TEAMS
 
-export module teams;
-
-export class teams
+class teams
 {
 public:
     std::vector<team> data;
@@ -50,3 +48,5 @@ public:
         return result;
     }
 };
+
+#endif

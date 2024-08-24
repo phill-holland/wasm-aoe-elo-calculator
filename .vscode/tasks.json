@@ -11,70 +11,18 @@
     },
     "tasks": [
         {
-            "label": "Make Debug",
+            "label": "Build",
             "type": "shell",
-            "command": "cmake -GNinja -DCMAKE_CXX_FLAGS=\"-O0 -g\" ../",
-            "hide": true,
+            "command": "em++ -lembind main.cpp point.cpp calculator.cpp -o ${workspaceRoot}/build/main.js -s WASM=1 -I../include",
             "group": {
                 "kind": "build",
                 "isDefault": true
             },
             "options": {
-                "cwd": "${workspaceRoot}/build"
+                "cwd": "${workspaceRoot}/src/source"
             },
             "problemMatcher": []
         },        
-        {
-            "label": "Build Debug",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build",
-                ".",
-                "--parallel"
-
-            ],
-            "options": {
-                "cwd": "${workspaceRoot}/build"
-            },
-            "dependsOn": [
-                "Make Debug"
-            ],
-            "group": "build",
-            "problemMatcher": []
-        },
-        {
-            "label": "Make Release",
-            "type": "shell",
-            "command": "cmake -GNinja -DCMAKE_BUILD_TYPE=\"Release -O2 -g\" ../",
-            "hide": true,
-            "group": {
-                "kind": "build",
-                "isDefault": true
-            },
-            "options": {
-                "cwd": "${workspaceRoot}/build"
-            },
-            "problemMatcher": []
-        },        
-        {
-            "label": "Build Release",
-            "type": "shell",
-            "command": "cmake",
-            "args": [
-                "--build",
-                ".",
-                "--parallel"
-            ],
-            "options": {
-                "cwd": "${workspaceRoot}/build"
-            },
-            "dependsOn": [
-                "Make Release"
-            ],
-            "group": "build",
-            "problemMatcher": []
-        },
         {
             "label": "Clean",
             "type": "shell",
@@ -87,6 +35,41 @@
                 "*"
             ],
             "problemMatcher": []
+        },
+        {
+            "label": "Launch Server",
+            "type": "shell",
+            "isBackground": true,
+            "command": "python3",
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "hide": true,
+            "options": {
+                "cwd": "${workspaceRoot}"
+            },
+            "args": [
+                "-m",
+                "http.server",
+                "4040"
+            ],
+            "problemMatcher": [{
+            "pattern": [{
+                "regexp": ".",
+                "file": 1,"line": 1,
+                "column": 1,"message": 1
+            }],
+            "background": {
+                "activeOnStart": true,
+                "beginsPattern": { "regexp": "." },
+                "endsPattern": { "regexp": "." }
+            },
+            }]
         }
     ]
 }

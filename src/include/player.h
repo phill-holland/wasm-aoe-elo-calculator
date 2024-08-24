@@ -1,9 +1,9 @@
-module;
 #include <string>
 
-export module player;
+#ifndef _PLAYER
+#define _PLAYER
 
-export class player
+class player
 {
 public:
     int elo;    
@@ -34,3 +34,5 @@ public:
         return result;
     }
 };
+
+#endif
