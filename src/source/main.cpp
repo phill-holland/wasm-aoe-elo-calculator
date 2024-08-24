@@ -1,6 +1,3 @@
-// source exwasm1.cpp
-// em++ -lembind exwasm1.cpp -o exwasm1.js -s WASM=1 [compilation]
-// output: exwasm1.wasm (bytecode) and exwasm1.js (JS glue-code)
 #include<string>
 #include<emscripten.h>
 #include<emscripten/bind.h>
