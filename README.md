@@ -10,6 +10,7 @@ emcc -o hello2.html hello2.cpp -O3 --shell-file html_template/shell_minimal.html
 
 emcc -o hello3.html hello3.cpp --shell-file html_template/shell_minimal.html -s NO_EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=['ccall']"
 
+and github workflow for compiling
 need deploy script to vercel!!!
 
 // ***
