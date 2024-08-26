@@ -1,35 +1,22 @@
 # Age of Empire 1 - ELO Calculator (wasm)
 
-source ./emsdk_env.sh
+WASM build of;
 
-python3 -m http.server 4040
+https://github.com/phill-holland/aoe-elo-calculator
 
-emcc reverse.cpp -s STANDALONE_WASM –o reverse.wasm
+Page available here;
 
-emcc -o hello2.html hello2.cpp -O3 --shell-file html_template/shell_minimal.html
+https://phill-holland.github.io/wasm-aoe-elo-calculator/index.html
 
-emcc -o hello3.html hello3.cpp --shell-file html_template/shell_minimal.html -s NO_EXIT_RUNTIME=1 -s "EXPORTED_RUNTIME_METHODS=['ccall']"
-
-and github workflow for compiling
-need deploy script to vercel!!!
-
-// ***
-em++ -lembind exwasm1.cpp -o exwasm1.js -s WASM=1
-// ****
-
-em++ -lembind exwasm1.cpp -o exwasm1.js -s WASM=1 -I../include
-
-building from src/source directory
+Building;
+```
+cd /src/source
 em++ -lembind main.cpp point.cpp calculator.cpp -o ../../build/main.js -s WASM=1 -I../include
+```
 
-https://developer.mozilla.org/en-US/docs/WebAssembly/C_to_Wasm
+You'll need to download emscripten, EMSDK and install here to build;
 
-
-http://perso-laris.univ-angers.fr/~cottenceau/tutowasmcpp.pdf
-
-
-https://emscripten.org/docs/getting_started/downloads.html?highlight=post%20js
-
+https://emscripten.org/docs/getting_started/downloads.html
 
 This code repo computes team members based on their ELO, or ranked score during setting up a multiplayer game of Age Of Empires 1.
 
