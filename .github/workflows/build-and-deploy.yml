@@ -28,7 +28,7 @@ jobs:
       uses: actions/cache@v3
       with:
         path: |
-          /emsdk
+          ${{ github.workspace }}/emsdk
         key: install-apt
 
     - name: Install emscripten    
@@ -42,12 +42,6 @@ jobs:
         cd emsdk
         source ./emsdk_env.sh
         printenv >> $GITHUB_ENV
-
-#    - name: Set reusable strings
-#      id: strings
-#      shell: bash
-#      run: |
-#        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
     - name: Build
       run: |
