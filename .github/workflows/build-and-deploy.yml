@@ -51,7 +51,7 @@ jobs:
 
     - name: Build
       run: |
-        cd /src/source
+        cd ${{ github.workspace }}/src/source
         em++ -lembind main.cpp point.cpp calculator.cpp -o /build/main.js -s WASM=1 -I../include
 
 #  deploy:
