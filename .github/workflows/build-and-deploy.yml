@@ -1,0 +1,68 @@
+name: test build and deploy
+
+on:
+  push:
+    branches: [ "main" ]
+
+#env:
+#  FLY_API_TOKEN: ${{ secrets.FLY_TOKEN }}
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+
+    strategy:      
+      fail-fast: true
+
+      matrix:
+        os: [ubuntu-latest]
+        build_type: [Release]
+        include:
+          - os: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+
+    - name: cache install
+      id: cache-install
+      uses: actions/cache@v3
+      with:
+        path: |
+          /emsdk
+        key: install-apt
+
+    - name: Install emscripten    
+      if: steps.cache-install.outputs.cache-hit != 'true'  
+      timeout-minutes: 10
+      run: |
+        sh -c .github/workflows/emscripten.sh
+            
+    - name: Setup emscripten environment
+      run: |
+        cd emsdk
+        source ./emsdk_env.sh
+        printenv >> $GITHUB_ENV
+
+    - name: Set reusable strings
+      id: strings
+      shell: bash
+      run: |
+        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+    - name: Build
+      run: |
+        cd /src/source
+        em++ -lembind main.cpp point.cpp calculator.cpp -o /build/main.js -s WASM=1 -I../include
+
+#  deploy:
+#    name: Deploy to Fly
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v3
+        
+#      - name: Setup flyctl
+#        uses: superfly/flyctl-actions/setup-flyctl@master
+
+#      - name: Deploy
+#        run: flyctl deploy --remote-only
