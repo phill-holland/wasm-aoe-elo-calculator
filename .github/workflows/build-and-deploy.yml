@@ -43,16 +43,16 @@ jobs:
         source ./emsdk_env.sh
         printenv >> $GITHUB_ENV
 
-    - name: Set reusable strings
-      id: strings
-      shell: bash
-      run: |
-        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+#    - name: Set reusable strings
+#      id: strings
+#      shell: bash
+#      run: |
+#        echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
 
     - name: Build
       run: |
         cd ${{ github.workspace }}/src/source
-        em++ -lembind main.cpp point.cpp calculator.cpp -o /build/main.js -s WASM=1 -I../include
+        em++ -lembind main.cpp point.cpp calculator.cpp -o ${{ github.workspace }}/main.js -s WASM=1 -I../include
 
 #  deploy:
 #    name: Deploy to Fly
