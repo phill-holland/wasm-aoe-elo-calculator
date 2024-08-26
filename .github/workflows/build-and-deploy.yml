@@ -29,7 +29,7 @@ jobs:
       with:
         path: |
           ${{ github.workspace }}/emsdk
-        key: install-apt
+        key: install-emscripten
 
     - name: Install emscripten    
       if: steps.cache-install.outputs.cache-hit != 'true'  
